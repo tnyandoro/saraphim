@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans antialiased;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-seraphim-orange to-orange-400 bg-clip-text text-transparent;
+  }
+
+  .tech-pattern {
+    background-image:
+      linear-gradient(rgba(234, 88, 12, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(234, 88, 12, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+}
