@@ -1,4 +1,11 @@
-import { Shield, Github, Linkedin, Twitter, Mail } from "lucide-react";
+import {
+  Shield,
+  Github,
+  Linkedin,
+  Twitter,
+  Mail,
+  Facebook,
+} from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -16,7 +23,6 @@ export default function Footer() {
                   className="h-12 w-auto"
                 />
               </div>
-              <span className="text-xl font-bold">Saraphim</span>
             </div>
             <p className="text-gray-400 mb-4 leading-relaxed">
               Enterprise cybersecurity solutions. Your trusted partner in threat
@@ -41,12 +47,6 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#performanta"
-                  className="text-gray-400 hover:text-seraphim-orange transition-colors"
-                ></a>
-              </li>
-              <li>
-                <a
                   href="#services"
                   className="text-gray-400 hover:text-seraphim-orange transition-colors"
                 >
@@ -67,6 +67,29 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Connect</h3>
             <div className="flex gap-3">
+              {/* Facebook */}
+              <a
+                href="https://www.facebook.com/profile.php?id=61586196539204"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-seraphim-orange transition-all duration-300"
+                aria-label="Facebook"
+              >
+                <Facebook className="w-5 h-5" />
+              </a>
+
+              {/* X (Twitter) */}
+              <a
+                href="https://x.com/saraphim_cyber"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-seraphim-orange transition-all duration-300"
+                aria-label="X"
+              >
+                <Twitter className="w-5 h-5" />
+              </a>
+
+              {/* LinkedIn */}
               <a
                 href="#"
                 className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-seraphim-orange transition-all duration-300"
@@ -74,13 +97,8 @@ export default function Footer() {
               >
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a
-                href="#"
-                className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-seraphim-orange transition-all duration-300"
-                aria-label="Twitter"
-              >
-                <Twitter className="w-5 h-5" />
-              </a>
+
+              {/* GitHub */}
               <a
                 href="#"
                 className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-seraphim-orange transition-all duration-300"
@@ -88,6 +106,8 @@ export default function Footer() {
               >
                 <Github className="w-5 h-5" />
               </a>
+
+              {/* Email */}
               <a
                 href="mailto:info@seraphim.com"
                 className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-seraphim-orange transition-all duration-300"

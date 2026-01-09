@@ -9,10 +9,11 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center space-x-3">
-            <img src="/logo.png" alt="Saraphim Group" className="h-16 w-auto" />
+            <img src="/logo.png" alt="Saraphim Group" className="h-12 w-auto" />
           </div>
 
           <nav className="hidden md:flex space-x-8">
+            {" "}
             <a
               href="#home"
               className="text-white hover:text-orange-600 transition-colors font-medium"

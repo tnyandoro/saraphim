@@ -26,19 +26,15 @@ export default function Navbar() {
         isScrolled ? "bg-zinc-900 shadow-lg" : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex justify-between items-center h-24">
           {/* Logo Area */}
           <a href="#" className="flex items-center gap-3 group">
-            <div
-              className={`w-20 h-20 rounded-lg flex items-center justify-center transition-colors ${
-                isScrolled ? "bg-seraphim-orange" : "bg-seraphim-orange"
-              }`}
-            >
+            <div className="w-auto h-auto rounded-lg flex items-center justify-center transition-colors py-2">
               <img
                 src="/logo.png"
                 alt="Saraphim Group"
-                className="h-20 w-20 md:h-24"
+                className="h-auto w-auto md:h-24 object-contain"
               />
             </div>
 

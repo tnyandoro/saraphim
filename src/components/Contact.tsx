@@ -299,7 +299,7 @@ export default function Contact() {
                       href="mailto:tshikanihasani@gmail.com"
                       className="text-seraphim-orange hover:underline"
                     >
-                      tshikanihasani@gmail.com
+                      tshikanihasani@saraphim.co.za
                     </a>
                     <br />
                     <a
