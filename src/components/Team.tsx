@@ -4,6 +4,7 @@ import hasaniImg from "/src/assets/images/hasani.png";
 import johnImg from "/src/assets/images/john.png";
 import mitchelImg from "/src/assets/images/michell.jpeg";
 import jonaImg from "/src/assets/images/jona.png";
+import forbesImg from "/src/assets/images/forbes.jpeg";
 
 export default function Team() {
   const teamMembers = [
@@ -51,8 +52,8 @@ export default function Team() {
         "Disaster Recovery Planning",
       ],
       image:
-        "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=500",
-    },
+        forbesImg,
+      },
     {
       name: "John Fundai Mugwagwa",
       role: "IT Consultant & Web Developer",

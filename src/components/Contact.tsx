@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Mail, Phone, MapPin, Send, CheckCircle2 } from "lucide-react";
 import emailjs from "@emailjs/browser";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -13,10 +14,11 @@ export default function Contact() {
   const [verificationEmail, setVerificationEmail] = useState("");
   const [verificationSent, setVerificationSent] = useState(false);
   const [verified, setVerified] = useState(false);
-  const [code, setCode] = useState(""); // generated code
-  const [userCode, setUserCode] = useState(""); // code entered by user
+  const [code, setCode] = useState("");
+  const [userCode, setUserCode] = useState("");
   const [codeTimestamp, setCodeTimestamp] = useState<number | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   const generateCode = () =>
     Math.floor(100000 + Math.random() * 900000).toString();
@@ -39,14 +41,19 @@ export default function Contact() {
       alert("Please enter your email to receive the verification code.");
       return;
     }
+    if (!turnstileToken) {
+      alert("Please complete the security verification.");
+      return;
+    }
+
     const newCode = generateCode();
     setCode(newCode);
     setCodeTimestamp(Date.now());
 
     emailjs
       .send(
-        "service_24l7vr7", // EmailJS Service ID
-        "template_dq1hssg", // Verification template
+        "service_24l7vr7",
+        "template_dq1hssg",
         {
           to_email: verificationEmail,
           name: formData.name || "User",
@@ -88,10 +95,14 @@ export default function Contact() {
       alert("Please verify your email before submitting the form.");
       return;
     }
+    if (!turnstileToken) {
+      alert("Please complete the security verification.");
+      return;
+    }
 
     emailjs
       .send(
-        "service_24l7vr7", // Contact form template
+        "service_24l7vr7",
         "template_ldar97e",
         formData,
         "hen2oVLMvjW_dAuP3"
@@ -105,6 +116,7 @@ export default function Contact() {
           setVerified(false);
           setVerificationSent(false);
           setVerificationEmail("");
+          setTurnstileToken("");
         }, 3000);
       })
       .catch((err) => {
@@ -135,7 +147,24 @@ export default function Contact() {
           <div>
             <div className="bg-white rounded-2xl shadow-xl p-8 md:p-10 border border-gray-200">
               <form onSubmit={handleSubmit} className="space-y-6">
-                {/* --- Verification Section --- */}
+                {/* --- Cloudflare Turnstile --- */}
+                <div className="space-y-3">
+                  <label className="block text-sm font-semibold text-seraphim-dark">
+                    Security Verification
+                  </label>
+                  <Turnstile
+                    siteKey="0x4AAAAAACLjc39Dfh_K3A59"
+                    onSuccess={(token) => setTurnstileToken(token)}
+                    onError={() => setTurnstileToken("")}
+                    onExpire={() => setTurnstileToken("")}
+                    options={{
+                      theme: "light",
+                      size: "normal",
+                    }}
+                  />
+                </div>
+
+                {/* --- Email Verification Section --- */}
                 {!verified && (
                   <div className="space-y-3">
                     <label className="block text-sm font-semibold text-seraphim-dark">
@@ -153,14 +182,13 @@ export default function Contact() {
                       <button
                         type="button"
                         onClick={sendVerificationCode}
-                        disabled={verificationSent}
-                        className="px-4 py-3 bg-seraphim-orange text-white rounded-lg hover:bg-orange-600 transition-all"
+                        disabled={verificationSent || !turnstileToken}
+                        className="px-4 py-3 bg-seraphim-orange text-white rounded-lg hover:bg-orange-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {verificationSent ? "Sent" : "Send Code"}
                       </button>
                     </div>
 
-                    {/* Code input appears only after code is sent */}
                     {verificationSent && !verified && (
                       <div className="flex gap-2 mt-2">
                         <input
@@ -249,7 +277,7 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  disabled={submitted || !verified}
+                  disabled={submitted || !verified || !turnstileToken}
                   className="w-full px-8 py-4 bg-seraphim-orange text-white rounded-lg font-semibold text-lg hover:bg-orange-600 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {submitted ? (
@@ -318,7 +346,7 @@ export default function Contact() {
                   <div>
                     <div className="font-semibold mb-1">Call Us</div>
                     <a
-                      href="tel:+1234567890"
+                      href="tel:+27795771773"
                       className="text-seraphim-orange hover:underline"
                     >
                       +27 (79) 577-1773
